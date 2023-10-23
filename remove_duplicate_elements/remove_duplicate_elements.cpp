@@ -27,41 +27,41 @@ class Remove_duplicate_class
 
         int removeDuplicates(vector<int>& nums)
         {
-            // Sort all the duplicates together
-            std::sort(nums.begin(), nums.end());
+            // if using C++17 uncomment the following
 
-            // Move all the duplicates to the end
-            //https://en.cppreference.com/w/cpp/algorithm/unique
-            auto last = std::unique(nums.begin(), nums.end());
+            // // Sort all the duplicates together
+            // std::sort(nums.begin(), nums.end());
+
+            // // Move all the duplicates to the end
+            // //https://en.cppreference.com/w/cpp/algorithm/unique
+            // auto last = std::unique(nums.begin(), nums.end());
             
-            // Remove all instances of the duplicates
-            nums.erase(last, nums.end());
+            // // Remove all instances of the duplicates
+            // nums.erase(last, nums.end());
 
-            // output
-            int k = nums.size();
-            return k;
+            // // output
+            // int k = nums.size();
+            // return k;
+
+            //if using C++11  uncomment the following
+            if (nums.empty()) 
+            {
+                return 0;
+            }
+
+            int uniqueCount = 1;  // Initialize count with 1 for the first element
+            int n = nums.size();
+
+            for (int i = 1; i < n; ++i) 
+            {
+                if (nums[i] != nums[i - 1]) {
+                    nums[uniqueCount] = nums[i];
+                    uniqueCount++;
+                }
+            }
+            
+            return uniqueCount;           
         }
-
-        void merge_function(vector<int>& num1, int m, vector<int>& num2, int n)
-        {
-            // Remove the last m number of elements
-            int vector_size = num1.size();
-            for(int i=0; i<vector_size-m; i++)
-            {
-                num1.pop_back();
-            }
-
-            // Merge the vectors
-            num1.insert(num1.end(), num2.begin(), num2.end());
-
-            // Sort them in increasing order (Lowest value on the top)
-            sort(num1.begin(), num1.end());
-
-            for (int i = 0; i < num1.size(); i++)
-            {
-                cout << num1[i] << endl;
-            }
-        };
 
     private:
         std::string name;
