@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <typeinfo>
 #include <string>
+#include <vector>
 
 using namespace std;
 class Hash_table
@@ -73,6 +74,18 @@ class Hash_table
                 std::cout << "Key: " << pair.first << ", Value: " << pair.second << std::endl;
             }
         }
+
+        // Add keys function that prints out an array of keys
+        std::vector<std::string> keys()
+        {
+            std::vector<std::string> key_list;
+            for (const auto& pair : myShoppingList) {
+                std::cout << pair.first << std::endl;
+                key_list.push_back(pair.first);
+            }
+            return key_list;
+        }
+
     private:
         std::unordered_map<std::string , double> myShoppingList;
         std::string list_name;
@@ -105,8 +118,15 @@ int main()
     // shopping_list.Set(key_4,value_4);
 
     // Getting examples
-    cout << "Case 1 Hash Table Get example" << endl;
+    cout << "Case 5 Hash Table Get example" << endl;
     std::string key_5 = "grapes";
     cout << shopping_list.Get(key_5) << endl;
+
+
+    //Printing out all the keys
+    cout << "Case 6 Hash Table Key Retrieval example" << endl;
+    shopping_list.keys();
+
     return 0;
+
 }
