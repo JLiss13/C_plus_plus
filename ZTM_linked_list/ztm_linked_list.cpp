@@ -13,7 +13,10 @@ public:
 
 class LinkedList {
 public:
-    LinkedList() : head(nullptr) {}
+    LinkedList() : head(nullptr) , tail(nullptr)
+    {
+        length=1;
+    }
 
     void append(int value) 
     {
@@ -30,7 +33,16 @@ public:
                 current = current->next;
             }
             current->next = newNode;
+            tail = newNode;
+            length++;
         }
+    }
+
+    void prepend(int value) 
+    {
+        Node* newNode = new Node(value);
+        newNode->next = head;
+        head = newNode;
     }
 
     void display() 
@@ -56,6 +68,8 @@ public:
 
 private:
     Node* head;
+    Node* tail;
+    int length;
 };
 
 int main() 
@@ -65,7 +79,8 @@ int main()
     myList.append(1);
     myList.append(99);
     myList.append(3);
-
+    myList.prepend(100);
+    
     myList.display();
 
     return 0;
