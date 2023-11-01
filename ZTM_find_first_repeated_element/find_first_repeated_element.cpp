@@ -10,7 +10,7 @@
 // undefined
 // Goal:
 //      Avoid brute/naive approach each time
-//      Space complexity O(n) and Time complexity O(a+b+c) for all hash_table operations
+//      Space complexity O(n) and Time complexity O(a+b+c) -> O(n) for all hash_table operations
 #include <iostream>
 #include <unordered_map>
 #include <typeinfo>
