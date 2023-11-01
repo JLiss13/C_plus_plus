@@ -7,8 +7,9 @@ class Node {
 public:
     int data;
     Node* next;
+    Node* prev;
 
-    Node(int value) : data(value), next(nullptr) {}
+    Node(int value) : data(value), next(nullptr), prev(nullptr) {}
 };
 
 class LinkedList {
@@ -18,12 +19,30 @@ public:
         length=1;
     }
 
+    void appendDoublely(int value) 
+    {
+        Node* newNode = new Node(value);
+        if (!head) 
+        {
+            head = newNode;
+            tail = newNode;
+        } 
+        else
+        {
+            newNode->prev = tail;
+            tail->next =  newNode;
+            tail = newNode;
+            length++;
+        }
+    }
+
     void append(int value) 
     {
         Node* newNode = new Node(value);
         if (!head) 
         {
             head = newNode;
+            tail = newNode;
         } 
         else
         {
@@ -43,6 +62,16 @@ public:
         Node* newNode = new Node(value);
         newNode->next = head;
         head = newNode;
+        length++;
+    }
+
+    void prependDoublely(int value) 
+    {
+        Node* newNode = new Node(value);
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+        length++;
     }
 
     void insertion(int index, int value) // O(n)
@@ -57,6 +86,7 @@ public:
             {
                 insertionNode-> next = current; // Current node is the insertionNode
                 prev_node->next = insertionNode; // Set the previous node next pointer to the insertionNode
+                length++;
             }
             else
             {
@@ -105,6 +135,7 @@ public:
             if (index == index_cnt)
             {
                 prev_node->next = current->next; // Set the previous node next pointer to the insertionNode
+                length--;
             }
             else
             {
@@ -115,6 +146,19 @@ public:
         }
     }
 
+    void reverse() //O(n)
+    {
+        // Make the tail the head and take the tail as the current and work my way backwards with the ptr assignments
+        for(int i=0;i<length;i++)
+        {
+            Node* newTail = tail;
+            prepend(newTail->data);
+            deletion(length);
+            tail=lookup(length-i);
+            display();
+        }
+
+    }
     void display() 
     {
         Node* current = head;
@@ -149,12 +193,16 @@ int main()
 
     myList.append(1);
     myList.append(99);
+    myList.appendDoublely(55);
     myList.append(300);
     myList.prepend(100);
     myList.insertion(2,22);
     myList.display();
     
     myList.deletion(3);
+    myList.display();
+
+    myList.reverse();
     myList.display();
 
     return 0;
