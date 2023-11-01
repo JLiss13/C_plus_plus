@@ -45,6 +45,76 @@ public:
         head = newNode;
     }
 
+    void insertion(int index, int value) // O(n)
+    {
+        // First while loop through the node list and adjust the pointers at the index section
+        Node* current  = head;
+        Node* insertionNode = new Node(value);
+        int index_cnt=0;
+        while(current)
+        {
+            if (index == index_cnt)
+            {
+                insertionNode-> next = current; // Current node is the insertionNode
+                prev_node->next = insertionNode; // Set the previous node next pointer to the insertionNode
+            }
+            else
+            {
+                prev_node = current; // Save the previous node 
+                current = current->next;
+            }
+
+            index_cnt++;
+            
+        }
+    }
+
+    Node* lookup(int index) // O(n)
+    {
+        if (!head)
+        {
+            return nullptr;
+        }
+
+        Node* current  = head;
+        int index_cnt=0;
+        while(current)
+        {
+            if (index == index_cnt)
+            {
+                break;
+            }
+            else
+            {
+                current = current->next;
+            }
+            index_cnt++;
+        }
+
+        return current;
+    }
+
+    void deletion(int index) //O(n)
+    {
+        // First while loop through the node list and adjust the pointers at the index section
+        Node* current  = head;
+        Node* deletionNode = nullptr;
+        int index_cnt=0;
+        while(current)
+        {
+            if (index == index_cnt)
+            {
+                prev_node->next = current->next; // Set the previous node next pointer to the insertionNode
+            }
+            else
+            {
+                prev_node = current; // Save the previous node 
+                current = current->next;
+            }
+            index_cnt++;
+        }
+    }
+
     void display() 
     {
         Node* current = head;
@@ -68,6 +138,7 @@ public:
 
 private:
     Node* head;
+    Node* prev_node;
     Node* tail;
     int length;
 };
@@ -78,9 +149,12 @@ int main()
 
     myList.append(1);
     myList.append(99);
-    myList.append(3);
+    myList.append(300);
     myList.prepend(100);
+    myList.insertion(2,22);
+    myList.display();
     
+    myList.deletion(3);
     myList.display();
 
     return 0;
