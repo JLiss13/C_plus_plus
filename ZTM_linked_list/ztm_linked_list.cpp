@@ -132,10 +132,18 @@ public:
         int index_cnt=0;
         while(current)
         {
-            if (index == index_cnt)
+            
+            if (index == 0)
+            {
+                head = current->next;
+                length--;
+                break;
+            }
+            else if (index == index_cnt)
             {
                 prev_node->next = current->next; // Set the previous node next pointer to the insertionNode
                 length--;
+                break;
             }
             else
             {
@@ -149,12 +157,15 @@ public:
     void reverse() //O(n)
     {
         // Make the tail the head and take the tail as the current and work my way backwards with the ptr assignments
-        for(int i=0;i<length;i++)
+        Node* newHead = head;
+        append(newHead->data);
+        deletion(0);
+        display();
+        for(int i=1;i<length-1;i++)
         {
-            Node* newTail = tail;
-            prepend(newTail->data);
-            deletion(length);
-            tail=lookup(length-i);
+            Node* newHead = head;
+            insertion(length-i,newHead->data);
+            deletion(0);
             display();
         }
 
@@ -198,11 +209,10 @@ int main()
     myList.prepend(100);
     myList.insertion(2,22);
     myList.display();
-    
-    myList.deletion(3);
-    myList.display();
 
     myList.reverse();
+    
+    myList.deletion(3);
     myList.display();
 
     return 0;
