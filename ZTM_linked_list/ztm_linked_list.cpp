@@ -14,8 +14,10 @@ public:
 
 class LinkedList {
 public:
-    LinkedList() : head(nullptr) , tail(nullptr)
+    LinkedList(int value) : head(nullptr) , tail(nullptr)
     {
+        Node* temp = new Node(value);
+        head = temp;
         length=1;
     }
 
@@ -170,6 +172,32 @@ public:
         }
 
     }
+    void reverseCleaner() //O(n)
+    {
+        // Have placeholders for first, second, and third items
+        // Check if the length of the linked list is 1 then don't reverse
+        if(length<2)
+        {
+            std::cout << "No need to reverse order of the linked list" << std::endl;
+        }
+        else
+        {
+            Node* prevNode = nullptr;
+            Node* current = head;
+            Node* nextNode = nullptr;
+            while (current != nullptr) {
+                //tranverses through the linked list and changes all the pointers to have the previous element be the next node
+                //steps through the re-referencing from head to tail
+                nextNode = current->next;
+                current->next = prevNode;
+                prevNode = current;
+                current = nextNode;
+            }
+            // then the last node to re-referenced becomes the head
+            head = prevNode;
+            display();
+        }
+    }
     void display() 
     {
         Node* current = head;
@@ -200,7 +228,7 @@ private:
 
 int main() 
 {
-    LinkedList myList;
+    LinkedList myList(14);
 
     myList.append(1);
     myList.append(99);
@@ -210,8 +238,9 @@ int main()
     myList.insertion(2,22);
     myList.display();
 
-    myList.reverse();
-    
+    // myList.reverse();
+    myList.reverseCleaner();
+
     myList.deletion(3);
     myList.display();
 
