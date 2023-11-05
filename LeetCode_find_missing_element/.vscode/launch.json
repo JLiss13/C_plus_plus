@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/ztm_linked_list",
+            "program": "${workspaceFolder}/build/leetcode_find_missing_element",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
