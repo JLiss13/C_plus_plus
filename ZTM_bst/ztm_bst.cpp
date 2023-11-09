@@ -151,6 +151,7 @@ public:
         // 1) parent->right == nullptr
         // 2) parent->right
         // 3) parent->right == nullptr && parent->left
+        // where parent == newReplacementnode
     }
     void DisplayParent()
     {
