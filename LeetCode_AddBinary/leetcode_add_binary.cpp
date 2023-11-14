@@ -16,18 +16,38 @@ class Solution
         string addBinary(string a, string b)
         {
             // Convert from string to binary or decimal
-            std::bitset<64> bits_a(a);
-            int a_int = static_cast<int>(bits_a.to_ulong());
+            std::bitset<128> bits_a(a);
+            int a_int = static_cast<int>(bits_a.to_ullong());
             cout << a_int <<endl;
 
-            std::bitset<64> bits_b(b);
-            int b_int = static_cast<int>(bits_b.to_ulong());
+            std::bitset<128> bits_b(b);
+            int b_int = static_cast<int>(bits_b.to_ullong());
             cout << b_int <<endl;
             int c_int = a_int + b_int; 
             cout << c_int <<endl;
-            
+
             // Then convert that value back to binary string
-            return std::bitset<64>(c_int).to_string();
+            std::string c_string = std::bitset<128>(c_int).to_string();
+
+            // Clean up the string
+            std::string new_string = "";
+            bool start_counting = false;
+            for(int i=0;i<c_string.size();i++)
+            {
+                if (c_string[i] == '1')
+                {
+                    start_counting = true;
+                }
+                if (start_counting)
+                {
+                    new_string+=c_string[i];
+                }
+            }
+            if (!start_counting)
+            {
+                new_string = "0";
+            }
+            return new_string;
         }
 };
 int main(){
