@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/ztm_bst",
+            "program": "${workspaceFolder}/build/design_shortURL",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
